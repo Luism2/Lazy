@@ -1,6 +1,32 @@
-/**
- * This file is just a silly example to show everything working in the browser.
- * When you're ready to start on your site, clear the file. Happy hacking!
- **/
+import { registerImage } from "./lazy";
 
-console.log('Happy hacking :)')
+const Minimun = 1;
+const Maximun = 98;
+
+const random = () => Math.floor(Math.random() * (Maximun - Minimun)) + Minimun;
+
+const createImageNode = () => {
+    const container =document.createElement('div')
+    container.className = 'p-4';
+
+ const imagen = document.createElement("img");
+ imagen.className = "mx-auto";
+ imagen.width = "500";
+    imagen.dataset.src = 'https://source.unsplash.com/random';
+
+container.appendChild(imagen);
+
+return container;
+
+};
+const nuevaImagen = createImageNode();
+const mountNode = document.getElementById ("images");
+
+const addbutton = document.querySelector("button");
+
+const addImagen = () => {
+    const newImagen = createImageNode();
+    mountNode.append(newImagen);
+    registerImage(newImagen);
+};
+addbutton.addEventListener("click", addImagen);
